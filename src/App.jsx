@@ -19,7 +19,7 @@ const theme = createTheme({
   palette: {
     primary: { main: '#092f9e' },
     success: { main: '#82e66b' },
-    background: { default: '#ffc08e', paper: '#ffead8' },
+    background: { default: '#faedf3', paper: '#ffffff' },
   },
   typography: {
     fontFamily: '"Trebuchet MS", Arial, sans-serif',
@@ -284,7 +284,7 @@ function SmartOrderPage() {
               />
               {formError && <Alert severity="error">{formError}</Alert>}
               <div className="submit-row">
-                <Button type="submit" variant="contained" color="success">
+                <Button type="submit" variant="contained" color="primary">
                   Kirim pesanan - {totalItems} roti - {rupiah(totalPrice)}
                 </Button>
               </div>

@@ -7,7 +7,7 @@
   font-optical-sizing: auto;
   font-weight: 400;
   color: #092f9e;
-  background: #ffc08e;
+  background: #faedf3;
 }
 
 * {
@@ -18,7 +18,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   margin: 0;
-  background: #ffc08e;
+  background: #faedf3;
 }
 
 button,
