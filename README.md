@@ -1,19 +1,55 @@
-# React + Vite
+# Tewiwi House — frontend React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend untuk prototipe pemesanan Tewiwi House, dibangun dengan React, Vite, React Router, dan Material UI.
 
-Currently, two official plugins are available:
+## Menjalankan proyek
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Pastikan Node.js versi yang sesuai dengan Vite pada `package.json` sudah terpasang. Dari folder proyek:
 
-## React Compiler
+```bash
+npm install
+npm run dev
+```
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+Perintah pemeriksaan:
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+```bash
+npm run lint
+npm run build
+```
 
-## Expanding the ESLint configuration
+## Struktur kode
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```text
+src/
+├── assets/                 # Gambar dan aset statis
+├── components/common/      # Komponen bersama, misalnya BrandHeader
+├── config/                 # Konfigurasi tema dan informasi pembayaran demo
+├── data/                   # Data produk dan daftar status pesanan
+├── pages/
+│   ├── customer/           # Form pemesanan dan halaman sukses
+│   └── admin/              # Dashboard admin
+├── services/               # Penyimpanan demo dan perhitungan slot pengiriman
+├── utils/                  # Fungsi utilitas, misalnya format rupiah
+├── App.jsx                 # Routing dan state aplikasi
+├── App.css                 # Styling aplikasi yang saat ini masih global
+└── main.jsx                # Entry point React
+```
+
+## Rute frontend
+
+- `/` — formulir pemesanan customer
+- `/sukses/:code` — ringkasan pesanan
+- `/admin` — dashboard pesanan, kapasitas, dan produksi
+
+## Batasan penting — prototipe, belum siap produksi
+
+- Data pesanan masih disimpan pada `localStorage` browser melalui `services/demoOrderStorage.js`. Data tidak dibagikan antarperangkat atau antarbrowser dan dapat diubah oleh pemilik browser.
+- Route `/admin` **belum dilindungi autentikasi**. Jangan gunakan untuk data pelanggan nyata atau dipublikasikan sebagai dashboard admin sebelum backend dan otorisasi ditambahkan.
+- Kapasitas pengiriman dihitung di frontend. Untuk aplikasi nyata, backend/database harus menjadi sumber kebenaran dan memvalidasi kuota saat pesanan dibuat agar tidak terjadi pemesanan melebihi kapasitas.
+- Informasi nomor rekening dan WhatsApp admin saat ini masih kosong pada `src/config/appConfig.js`. Isi hanya dengan detail bisnis yang benar sebelum demo pembayaran.
+- Tidak ada backend atau database yang disertakan dalam paket frontend ini. Integrasi backend, login admin, penyimpanan terpusat, validasi server, dan fitur AI/ML perlu dikerjakan sebagai tahap terpisah sebelum produksi.
+
+## Catatan pengembangan
+
+Halaman customer dan admin sekarang sudah dipisahkan ke file yang berbeda, sementara aplikasi tetap memakai satu proyek frontend React. Ini mempermudah pengembangan tanpa membuat dua aplikasi frontend yang harus dirawat terpisah.
