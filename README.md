@@ -4,7 +4,6 @@ Frontend untuk prototipe pemesanan Tewiwi House, dibangun dengan React, Vite, Re
 
 ## Menjalankan proyek
 
-Pastikan Node.js versi yang sesuai dengan Vite pada `package.json` sudah terpasang. Dari folder proyek:
 
 ```bash
 npm install
