@@ -1,15 +1,17 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Paper, Typography } from '@mui/material'
+import { Alert, Paper, Typography } from '@mui/material'
 import BrandHeader from '../../components/common/BrandHeader'
 import { products } from '../../data/products'
 import { orderStatuses } from '../../data/orderStatuses'
 import { getDeliveryOptions } from '../../services/deliveryService'
+import { isAdminDemoMode } from '../../services/adminAuthService'
 import { rupiah } from '../../utils/formatCurrency'
 
-function AdminDashboard({ orders, onUpdateStatus }) {
+function AdminDashboard({ orders, onUpdateStatus, onSignOut }) {
   const [tab, setTab] = useState('Pesanan')
   const [statusFilter, setStatusFilter] = useState('Semua status')
+  const [signOutError, setSignOutError] = useState('')
   const deliveryOptions = getDeliveryOptions(orders)
   const visibleOrders =
     statusFilter === 'Semua status'
@@ -35,12 +37,22 @@ function AdminDashboard({ orders, onUpdateStatus }) {
     }))
     .filter((product) => product.quantity > 0)
 
+  async function handleSignOut() {
+    setSignOutError('')
+    try {
+      await onSignOut()
+    } catch (error) {
+      console.error('Gagal logout admin:', error)
+      setSignOutError('Gagal keluar dari akun. Silakan coba lagi.')
+    }
+  }
+
   return (
     <main className="page-shell admin-shell">
       <BrandHeader admin />
       <div className="admin-content">
         <div className="admin-tabs" role="tablist" aria-label="Dashboard admin">
-          {['Pesanan', 'Kapasitas', 'Produksi'].map((tabName) => (
+          {['Pesanan', 'Kapasitas', 'Produksi', 'Statistik'].map((tabName) => (
             <button
               key={tabName}
               type="button"
@@ -53,7 +65,13 @@ function AdminDashboard({ orders, onUpdateStatus }) {
             </button>
           ))}
           <Link className="customer-link" to="/">Halaman customer</Link>
+          <button className="admin-signout" type="button" onClick={handleSignOut}>
+            Keluar
+          </button>
         </div>
+
+        
+        {signOutError && <Alert severity="error" className="admin-auth-alert">{signOutError}</Alert>}
 
         <div className="admin-stats">
           <Paper className="stat-card" elevation={0}>
@@ -175,6 +193,16 @@ function AdminDashboard({ orders, onUpdateStatus }) {
                 ))}
               </div>
             )}
+          </Paper>
+        )}
+
+        {tab === 'Statistik' && (
+          <Paper className="order-card admin-card" elevation={0}>
+            <Typography component="h1" className="admin-title">Statistik</Typography>
+            <div className="statistics-chart-slots">
+              <div className="statistics-chart-slot" aria-label="Area grafik statistik pertama" />
+              <div className="statistics-chart-slot" aria-label="Area grafik statistik kedua" />
+            </div>
           </Paper>
         )}
       </div>
