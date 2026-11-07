@@ -966,3 +966,328 @@
     font-size: 0.84rem;
   }
 }
+
+/* ── Brand header tracking link ─────────────────────────────── */
+.brand-track-link {
+  color: #092f9e;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #edf3ff;
+  transition: background 150ms ease;
+}
+
+.brand-track-link:hover {
+  background: #dce7ff;
+}
+
+/* ── Track order page ────────────────────────────────────────── */
+
+.track-content {
+  margin-top: 28px;
+}
+
+.track-card.MuiPaper-root {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Header: icon box + title + code */
+.track-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.track-icon-box {
+  display: grid;
+  width: 52px;
+  height: 52px;
+  flex: 0 0 52px;
+  place-items: center;
+  border-radius: 14px;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.track-title.MuiTypography-root {
+  margin: 0 0 2px;
+  color: #092f9e;
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.track-code {
+  margin: 0;
+  color: #3156a0;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* Description */
+.track-description {
+  margin: 0 0 20px;
+  color: #3156a0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+/* ── New stepper (dot + line) ───────────────────────────────── */
+.track-stepper {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 4px 0 8px;
+}
+
+.track-step {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Horizontal line between steps — sits behind the dots */
+.track-step-line {
+  position: absolute;
+  top: 7px;
+  left: calc(50% + 9px);
+  right: calc(-50% + 9px);
+  height: 3px;
+  border-radius: 999px;
+  background: #d5def2;
+  z-index: 0;
+}
+
+.track-step-line.is-filled {
+  background: #092f9e;
+}
+
+/* Dot */
+.track-step-dot {
+  position: relative;
+  z-index: 1;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 3px solid #d5def2;
+  background: #ffffff;
+  transition: border-color 200ms ease, background 200ms ease;
+}
+
+.track-step.is-done .track-step-dot {
+  border-color: #092f9e;
+  background: #092f9e;
+}
+
+.track-step.is-active .track-step-dot {
+  border-color: #092f9e;
+  background: #092f9e;
+  box-shadow: 0 0 0 4px rgb(9 47 158 / 15%);
+}
+
+/* Label */
+.track-step-label {
+  margin-top: 8px;
+  color: #9aaac8;
+  font-size: 0.67rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.track-step.is-done .track-step-label {
+  color: #536995;
+}
+
+.track-step.is-active .track-step-label {
+  color: #092f9e;
+  font-size: 0.72rem;
+}
+
+/* Cancelled badge */
+.track-cancelled-badge {
+  margin-bottom: 20px;
+  padding: 11px 16px;
+  border-radius: 12px;
+  background: #fce8ed;
+  color: #d94f70;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+/* Info panel */
+.track-info-panel {
+  margin-bottom: 24px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #edf3ff;
+}
+
+.track-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.track-info-row:not(:last-child) {
+  border-bottom: 1px solid #dce7ff;
+}
+
+.track-info-row span {
+  color: #536995;
+  font-size: 0.82rem;
+  flex-shrink: 0;
+}
+
+.track-info-row strong {
+  color: #092f9e;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+/* Order summary */
+.track-order-summary h2 {
+  margin: 0 0 12px;
+  color: #092f9e;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+/* Back link */
+.track-back-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: #092f9e;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.track-back-link:hover {
+  text-decoration: underline;
+}
+
+/* Button lacak di OrderSuccessPage */
+.track-order-button.MuiButton-root {
+  min-height: 42px;
+  margin-top: 10px;
+  padding: 9px 18px;
+  border-radius: 12px;
+  border: 2px solid #092f9e;
+  color: #092f9e;
+}
+
+@media (max-width: 500px) {
+  .track-step-label {
+    font-size: 0.6rem;
+  }
+
+  .track-step.is-active .track-step-label {
+    font-size: 0.63rem;
+  }
+}
+
+/* ── Last-order banner ─────────────────────────────────────────── */
+
+.last-order-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 14px 0 0;
+  padding: 13px 16px;
+  border: 1.5px solid #c7d5f8;
+  border-radius: 16px;
+  background: #edf3ff;
+  color: #092f9e;
+  animation: banner-slide-in 250ms ease;
+}
+
+@keyframes banner-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.last-order-banner-body {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  min-width: 0;
+}
+
+.last-order-banner-label {
+  color: #3156a0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.last-order-banner-code {
+  color: #092f9e;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.last-order-banner-actions {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  gap: 8px;
+}
+
+.last-order-track-link {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: #092f9e;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 150ms ease;
+  white-space: nowrap;
+}
+
+.last-order-track-link:hover {
+  background: #07277f;
+}
+
+.last-order-close-btn {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #536995;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background 150ms ease, color 150ms ease;
+}
+
+.last-order-close-btn:hover {
+  background: #d8e4fc;
+  color: #092f9e;
+}

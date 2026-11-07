@@ -1,11 +1,17 @@
 import { useState } from 'react'
 import { Alert, Button, Paper, TextField, Typography } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import BrandHeader from '../../components/common/BrandHeader'
 import sourdoughImage from '../../assets/sourdough.jpg'
 import { products } from '../../data/products'
 import { rupiah } from '../../utils/formatCurrency'
 import { getDeliveryOptions } from '../../services/deliveryService'
+import {
+  dismissLastOrder,
+  isLastOrderDismissed,
+  readLastOrderCode,
+  writeLastOrderCode,
+} from '../../services/demoOrderStorage'
 
 function SmartOrderPage({ orders, onCreateOrder }) {
   const navigate = useNavigate()
@@ -19,6 +25,17 @@ function SmartOrderPage({ orders, onCreateOrder }) {
   const [phoneError, setPhoneError] = useState('')
   const [addressError, setAddressError] = useState('')
   const [formError, setFormError] = useState('')
+
+  // Last-order banner state
+  const [bannerDismissed, setBannerDismissed] = useState(isLastOrderDismissed)
+  const lastOrderCode = readLastOrderCode()
+  const lastOrder = lastOrderCode ? orders.find((o) => o.code === lastOrderCode) : null
+  const showBanner = Boolean(lastOrder) && !bannerDismissed
+
+  const handleDismissBanner = () => {
+    dismissLastOrder()
+    setBannerDismissed(true)
+  }
 
   const selectedDelivery =
     deliveryOptions.find((option) => option.id === deliveryId) ?? deliveryOptions[1]
@@ -96,12 +113,36 @@ function SmartOrderPage({ orders, onCreateOrder }) {
     }
 
     onCreateOrder(order)
+    writeLastOrderCode(order.code)
     navigate(`/sukses/${order.code}`)
   }
 
   return (
     <main className="page-shell">
       <BrandHeader />
+
+      {showBanner && (
+        <div className="last-order-banner" role="region" aria-label="Pesanan terakhir">
+          <div className="last-order-banner-body">
+            <span className="last-order-banner-label">Pesanan terakhirmu</span>
+            <span className="last-order-banner-code">{lastOrder.code}</span>
+          </div>
+          <div className="last-order-banner-actions">
+            <Link to={`/tracking/${lastOrder.code}`} className="last-order-track-link">
+              Lacak
+            </Link>
+            <button
+              type="button"
+              className="last-order-close-btn"
+              aria-label="Tutup banner pesanan terakhir"
+              onClick={handleDismissBanner}
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+
       <section className="hero">
         <div className="hero-copy">
           <Typography component="h1" className="hero-title">
