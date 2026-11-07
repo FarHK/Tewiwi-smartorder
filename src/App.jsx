@@ -12,6 +12,7 @@ import {
 } from './services/adminAuthService'
 import SmartOrderPage from './pages/customer/SmartOrderPage'
 import OrderSuccessPage from './pages/customer/OrderSuccessPage'
+import TrackOrderPage from './pages/customer/TrackOrderPage'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminLoginPage from './pages/admin/AdminLoginPage'
 import AdminForgotPasswordPage from './pages/admin/AdminForgotPasswordPage'
@@ -66,6 +67,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SmartOrderPage orders={orders} onCreateOrder={createOrder} />} />
           <Route path="/sukses/:code" element={<OrderSuccessPage orders={orders} />} />
+          <Route path="/tracking/:code" element={<TrackOrderPage orders={orders} />} />
           <Route
             path="/admin"
             element={
